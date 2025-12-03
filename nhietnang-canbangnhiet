@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name=" viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thí nghiệm ảo: Nhiệt năng & Cân bằng nhiệt – Vật lý 8</title>
+  <style>
+    body { 
+      font-family: "Times New Roman", serif; 
+      margin: 0; 
+      padding: 10px; 
+      background-color: #ffffff;
+    }
+    h2 {
+      text-align: center;
+      color: #e65100;
+    }
+    #simulation-container {
+      width: 100%;
+      height: 600px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    #chatbot {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 320px;
+      background: #f3e5f5;
+      border: 1px solid #ce93d8;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      font-size: 13px;
+      z-index: 1000;
+    }
+    #chat-log {
+      height: 150px;
+      overflow-y: auto;
+      margin-bottom: 8px;
+      padding: 5px;
+      background: white;
+      border: 1px solid #d1c4e9;
+      font-size: 12px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      font-size: 13px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 5px;
+      padding: 5px 10px;
+      background: #7b1fa2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #6a1b9a;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Thí nghiệm ảo: Nhiệt năng & Cân bằng nhiệt</h2>
+<p><em>Trường THCS Lê Anh Xuân – Đà Nẵng | Môn Vật lý lớp 8</em></p>
+
+<iframe 
+  id="simulation-container" 
+  src="https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_all.html?locale=vi"
+  allowfullscreen>
+</iframe>
+
+<div id="chatbot">
+  <strong>💬 Trợ lý Vật lý AI</strong>
+  <div id="chat-log">
+    <em>Chào em! Em có thể hỏi: “Làm sao chọn nước hoặc sắt?”, “Năng lượng truyền từ đâu?”, “Vật nào nóng nhanh hơn?”, “Cách reset thí nghiệm?”…</em>
+  </div>
+  <input type="text" id="user-input" placeholder="Nhập câu hỏi về nhiệt năng..." />
+  <button onclick="sendQuestion()">Gửi</button>
+</div>
+
+<script>
+function sendQuestion() {
+  const input = document.getElementById("user-input");
+  const question = input.value.trim();
+  if (!question) return;
+
+  const chatLog = document.getElementById("chat-log");
+  chatLog.innerHTML += `<div><b>Bạn:</b> ${question}</div>`;
+
+  let answer = "Cảm ơn em! Đây là một chủ đề rất quan trọng trong đời sống – từ nấu ăn đến tiết kiệm điện!";
+
+  const lower = question.toLowerCase();
+
+  if ((lower.includes("chọn") || lower.includes("lựa")) && (lower.includes("vật liệu") || lower.includes("nước") || lower.includes("sắt") || lower.includes("gạch") || lower.includes("dầu"))) {
+    answer = "✅ Trong tab **'Systems'**, em kéo vật liệu (nước, sắt, gạch, dầu) từ kho sang bể chứa. Có thể dùng 1 hoặc 2 vật liệu để so sánh.";
+  }
+  else if ((lower.includes("điều chỉnh") || lower.includes("thay đổi")) && (lower.includes("nhiệt") || lower.includes("lạnh") || lower.includes("làm nóng") || lower.includes("làm lạnh"))) {
+    answer = "✅ Em kéo **nguồn nhiệt (lửa)** hoặc **nguồn lạnh (tuyết)** vào dưới vật liệu. Kéo ra để tắt. Nhiệt độ thay đổi theo thời gian thực!";
+  }
+  else if ((lower.includes("xem") || lower.includes("hiển thị")) && (lower.includes("biểu tượng") || lower.includes("năng lượng") || lower.includes("mũi tên"))) {
+    answer = "✅ Nhấn vào nút **'Energy Symbols'** (hình mặt cười + E) ở góc trên phải → các biểu tượng năng lượng (màu cam) sẽ hiện ra và di chuyển!";
+  }
+  else if (lower.includes("thiết lập lại") || lower.includes("reset") || lower.includes("làm lại")) {
+    answer = "✅ Nhấn nút **'Reset'** (hình vòng tròn có mũi tên) ở góc dưới phải → mọi thứ trở về trạng thái ban đầu.";
+  }
+  else if ((lower.includes("biến số") || lower.includes("độc lập")) && (lower.includes("thay đổi") || lower.includes("thí nghiệm"))) {
+    answer = "✅ **Biến số độc lập**: loại vật liệu, khối lượng, nhiệt độ ban đầu, nguồn nhiệt/lạnh. Em thay đổi chúng để quan sát ảnh hưởng đến nhiệt năng.";
+  }
+  else if ((lower.includes("nóng lên nhanh") || lower.includes("tăng nhiệt nhanh")) && (lower.includes("sắt") || lower.includes("nước"))) {
+    answer = "✅ **Sắt nóng lên nhanh hơn nước** vì **nhiệt dung riêng của sắt nhỏ hơn**. Cùng một lượng nhiệt, sắt tăng nhiệt độ nhiều hơn nước.";
+  }
+  else if ((lower.includes("năng lượng") || lower.includes("truyền")) && (lower.includes("tiếp xúc") || lower.includes("cân bằng") || lower.includes("dừng"))) {
+    answer = "✅ Năng lượng **truyền từ vật nóng sang vật lạnh**. Quá trình **dừng lại khi nhiệt độ hai vật bằng nhau** → đạt **cân bằng nhiệt**.";
+  }
+
+  chatLog.innerHTML += `<div style="background:#f3e5f5; padding:5px; margin:5px 0; border-left:3px solid #7b1fa2;"><b>AI:</b> ${answer}</div>`;
+  input.value = "";
+  chatLog.scrollTop = chatLog.scrollHeight;
+}
+</script>
+
+</body>
+</html>
